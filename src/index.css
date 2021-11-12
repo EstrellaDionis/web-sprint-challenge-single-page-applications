@@ -16,3 +16,8 @@ code {
 a {
   display: block;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {Link, Switch, Route} from 'react-router-dom';
-import './App.css'
-import Completion from '../src/Components/Completion'
+import './App.css';
+import * as yup from 'yup';
+import Completion from '../src/Components/Completion';
+import Order from '../src/Components/Order';
+import formSchema from '../src/Components/Order';
 
-const InitialOrderForm = {
+
+const initialOrderForm = {
   name: '',
   size: '',
   topping1: false,
@@ -11,12 +15,38 @@ const InitialOrderForm = {
   special: ''
 }
 
+const initialOrderFormErrors = {
+  name: '',
+  size: '',
+  topping1: '',
+  topping2: '',
+  special: ''
+}
+
+
 const App = () => {
+
+  const [pizza, setPizza] = useState({});
+  const [formValues, setFormValues] = useState(initialOrderForm);
+  const [formErrors, setFormErrors] = useState(initialOrderFormErrors);
+  const [disabled, setDisabled] = useState(true);
+
+
+const inputChange = (name, value) => {
+  console.log(name, value)
+}
+
+  // useEffect(() => {
+  //    formSchema.isValid(formValues)
+  //    .then((valid) => setDisabled(!valid))
+  // }, [formValues])
+
+
+
   return (
     <>
     <header>
       <h1>Lambda Eats</h1>
-      <p>You can remove this code and create your own header</p>
       <nav>
         <Link to='/'>Home</Link>
         <Link to='/pizza'>Order</Link>
@@ -30,7 +60,13 @@ const App = () => {
           </Route>
 
           <Route path='/pizza'>
-              <div>Order</div>
+              <Order 
+              inputChange = {inputChange}
+              formValues = {formValues}
+              setFormValues = {setFormValues}
+              formErrors = {formErrors}
+              disabled = {disabled}
+              />
           </Route>
 
           <Route path='/'>

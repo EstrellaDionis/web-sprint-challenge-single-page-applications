@@ -1,4 +1,4 @@
-import * as yup;
+import * as yup from 'yup';
 
 const formSchema = yup.object().shape({
     name: yup
@@ -15,5 +15,7 @@ const formSchema = yup.object().shape({
 
     topping2: yup.boolean(),
 
-    special: ''
+    special: yup.string()
 })
+
+export default formSchema;
